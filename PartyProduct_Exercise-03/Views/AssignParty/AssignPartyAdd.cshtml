@@ -1,0 +1,70 @@
+﻿@{
+    ViewData["Title"] = "Assign Party";
+}
+@inject PartyProduct_Exercise_03.Repository.IPartyRepository _partyRepository
+@inject PartyProduct_Exercise_03.Repository.IProductRepository _productRepository
+@model AssignPartyModel
+@{
+    string action;
+}
+
+<div class="text-center">
+    @if (ViewBag.assignPartyId == 0)
+    {
+        action = "AssignPartyAdd";
+        <h3 class="h3 font-weight-normal">Assign Party Add</h3>
+    }
+    else
+    {
+        action = "AssignPartyEdit";
+        <h3 class="h3 font-weight-normal">Assign Party Update</h3>
+    }
+</div>
+<br />
+
+<div class="container">
+
+    @if (ViewBag.IsSuccess == 1)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Congratulations</strong> You assigned Product <strong>@ViewBag.assignParty</strong> to Party <strong>@ViewBag.assignProduct</strong> successfully.
+        </div>
+    }
+    else if (ViewBag.IsSuccess == 2)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            This <strong>Party</strong> and <strong>Product</strong> pair is already assigned...!<br />
+            Please Choose different <strong>Product</strong> for this <strong>Party</strong>.
+        </div>
+    }
+
+    <form method="post" enctype="multipart/form-data" asp-controller="AssignParty" asp-action="@action">
+        <div class="form-group row justify-content-center">
+            <label asp-for="PartyId" class="col-sm-2 col-form-label">Party Name :</label>
+            <select asp-for="PartyId" class="form-control col-sm-4" asp-items="(await _partyRepository.GetAllParty()).Select(x => new SelectListItem() { Value = x.Id.ToString(), Text = x.PartyName })">
+                <option value="">Choose Party</option>
+            </select>
+            <span asp-validation-for="PartyId" class="text-danger"></span>
+        </div>
+
+        <div class="form-group row justify-content-center">
+            <label asp-for="ProductId" class="col-sm-2 col-form-label">Product Name :</label>
+            <select asp-for="ProductId" class="form-control col-sm-4" asp-items="(await _productRepository.GetAllProduct()).Select(x => new SelectListItem() { Value = x.Id.ToString(), Text = x.ProductName })">
+                <option value="">Choose Product</option>
+            </select>
+            <span asp-validation-for="ProductId" class="text-danger"></span>
+        </div><br />
+
+        <div class="form-group text-center">
+            @if (ViewBag.assignPartyId == 0)
+            {
+                <input type="submit" value="Save" class="btn btnSave" />
+            }
+            else
+            {
+                <input type="submit" value="Update" class="btn btnSave" />
+            }
+            <a asp-controller="AssignParty" asp-action="AssignParty" class="btn btnCancel">Cancel</a>
+        </div>
+    </form>
+</div>

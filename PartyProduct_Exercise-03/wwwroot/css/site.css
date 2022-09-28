@@ -1,0 +1,140 @@
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+a.navbar-brand {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+/* Provide sufficient contrast against white background */
+a {
+  color: #0366d6;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  font-size: 14px;
+}
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.border-top {
+  border-top: 1px solid #e5e5e5;
+}
+.border-bottom {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy {
+  font-size: 1rem;
+  line-height: inherit;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  line-height: 60px; /* Vertically center the text there */
+}
+
+.btnAdd {
+    color: White;
+    background-color: #009999;
+    border-color: #009999;
+    padding: 0.5em;
+    border-radius: 0.4em;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+    .btnAdd:hover {
+        background-color: white;
+        color: #009999;
+        transition: .4s;
+    }
+
+.btnSave {
+    color: White;
+    background-color: #5cb85c;
+    border-color: #4cae4c;
+    padding: 0.5em;
+    border-radius: 0.4em;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+    .btnSave:hover {
+        background-color: white;
+        color: #5CB85C;
+        transition: .4s;
+    }
+
+.btnCancel {
+    color: White;
+    background-color: #CCCCCC;
+    border-color: #CCCCCC;
+    padding: 0.5em;
+    border-radius: 0.4em;
+    cursor: pointer;
+    font-size: 1em;
+    color: white;
+}
+
+    .btnCancel:hover {
+        background-color: white;
+        color: #CCCCCC;
+        transition: .4s;
+    }
+
+.CloseInvoice {
+    color: White;
+    background-color: #ac2925;
+    border-color: #ac2925;
+    padding: 0.5em;
+    border-radius: 0.4em;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+    .CloseInvoice:hover {
+        background-color: white;
+        color: #ac2925;
+        transition: .4s;
+    }
+
+.BoxShaddow:focus {
+    box-shadow: 0px 0px 5px #16E2F5;
+}

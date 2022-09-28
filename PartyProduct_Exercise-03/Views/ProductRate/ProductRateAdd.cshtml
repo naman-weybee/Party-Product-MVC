@@ -1,0 +1,73 @@
+﻿@{
+    ViewData["Title"] = "Assign Party";
+}
+@inject PartyProduct_Exercise_03.Repository.IProductRepository _productRepository
+@model ProductRateModel
+@{
+    string action;
+}
+
+<div class="text-center">
+    @if (ViewBag.productRateId == 0)
+    {
+        action = "ProductRateAdd";
+        <h3 class="h3 font-weight-normal">Product Rate Add</h3>
+    }
+    else
+    {
+        action = "ProductRateEdit";
+        <h3 class="h3 font-weight-normal">Product Rate Update</h3>
+    }
+</div>
+<br />
+
+<div class="container">
+
+    @if (ViewBag.IsSuccess == 1)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Congratulations</strong> You added new Product <strong>@ViewBag.productName</strong> at Rate <strong>@ViewBag.productRate</strong> on <strong>@DateTime.Today.ToString("dd-MM-yyyy")</strong> successfully.
+        </div>
+    }
+    else if (ViewBag.IsSuccess == 2)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            Rate is already assigned for this <strong>Product</strong>
+            Please Choose different <strong>Product</strong>.
+        </div>
+    }
+
+    <form method="post" enctype="multipart/form-data" asp-controller="ProductRate" asp-action="@action">
+        <div class="form-group row justify-content-center">
+            <label asp-for="ProductId" class="col-sm-2 col-form-label">Product Name :</label>
+            <select asp-for="ProductId" class="form-control col-sm-4" asp-items="(await _productRepository.GetAllProduct()).Select(x => new SelectListItem() { Value = x.Id.ToString(), Text = x.ProductName })">
+                <option value="">Choose Product Name</option>
+            </select>
+            <span asp-validation-for="ProductId" class="text-danger"></span>
+        </div>
+
+        <div class="form-group row justify-content-center">
+            <label asp-for="Rate" class="col-sm-2 col-form-label">Rate :</label>
+            <input asp-for="Rate" class="form-control col-sm-4" type="number" />
+            <span asp-validation-for="Rate" class="text-danger"></span>
+        </div>
+
+        <div class="form-group row justify-content-center">
+            <label asp-for="DateOfRate" class="col-sm-2 col-form-label">Date of Rate :</label>
+            <input asp-for="DateOfRate" class="form-control col-sm-4" type="datetime" value="@DateTime.Today.ToString("dd-MM-yyyy")" disabled="disabled" style="color:gray" />
+            <span asp-validation-for="DateOfRate" class="text-danger"></span>
+        </div><br />
+
+        <div class="form-group text-center">
+            @if (ViewBag.productRateId == 0)
+            {
+                <input type="submit" value="Save" class="btn btnSave" />
+            }
+            else
+            {
+                <input type="submit" value="Update" class="btn btnSave" />
+            }
+            <a asp-controller="ProductRate" asp-action="ProductRate" class="btn btnCancel">Cancel</a>
+        </div>
+    </form>
+</div>

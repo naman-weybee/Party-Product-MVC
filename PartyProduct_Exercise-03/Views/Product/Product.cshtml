@@ -1,0 +1,46 @@
+﻿@{
+    ViewData["Title"] = "Products";
+}
+@model IEnumerable<ProductModel>
+
+<div class="text-center">
+    <h3 class="h3 font-weight-normal">Product List</h3>
+</div>
+
+<div class="float-right">
+    <a class="btn btnAdd" asp-controller="Product" asp-action="ProductAdd">Add Product</a>
+</div>
+<br />
+<br />
+@if (ViewBag.delete == true)
+{
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>Sorry,</strong> You can not delete this Product Because this Product is Assigned to Product(s) OR it is avalaible in Product Rate..
+</div>
+}
+<br />
+
+<div class="container">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th width="15%">#</th>
+                <th>Product Name</th>
+                <th width="30%">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <th scope="row">@item.Id</th>
+                    <td>@item.ProductName</td>
+                    <td>
+                        <a asp-controller="Product" asp-action="ProductEdit" asp-route-id="@item.Id" asp-route-productname="@item.ProductName" data-value="@item.Id" class="btn btn-info">Edit</a>
+                        <a asp-controller="Product" asp-action="ProductDelete" data-value="@item.Id" asp-route-id="@item.Id" class="btn btn-danger" onclick="return confirm('Are You Sure... You want to Delete this Product ?')">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

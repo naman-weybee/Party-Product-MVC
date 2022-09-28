@@ -1,0 +1,64 @@
+﻿@{
+    ViewData["Title"] = "Add Product";
+}
+@model ProductModel
+@{
+    string action;
+}
+
+<div class="text-center">
+    @if (ViewBag.productId == 0)
+    {
+        action = "ProductAdd";
+        <h3 class="h3 font-weight-normal">Product Add</h3>
+    }
+    else
+    {
+        action = "ProductEdit";
+        <h3 class="h3 font-weight-normal">Product Update</h3>
+    }
+</div>
+<br />
+
+<div class="container">
+
+    @if (ViewBag.IsSuccess == 1)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Congratulations</strong> You added new Product <strong>@ViewBag.productName</strong> successfully.
+        </div>
+    }
+    else if (ViewBag.IsSuccess == 2)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            This <strong>Product</strong> is already Exist.
+        </div>
+    }
+
+    <form method="post" enctype="multipart/form-data" asp-controller="Product" asp-action="@action">
+        <div class="form-group row justify-content-center">
+            <label asp-for="ProductName" class="col-sm-2 col-form-label">Product Name :</label>
+            @if (ViewBag.productId == 0)
+            {
+                <input asp-for="ProductName" class="form-control col-sm-4" autofocus value="" />
+            }
+            else
+            {
+                <input asp-for="ProductName" class="form-control col-sm-4" autofocus />
+            }
+            <span asp-validation-for="ProductName" class="text-danger"></span>
+        </div><br />
+
+        <div class="form-group text-center">
+            @if (ViewBag.productId == 0)
+            {
+                <input type="submit" value="Save" class="btn btnSave" />
+            }
+            else
+            {
+                <input type="submit" value="Update" class="btn btnSave" />
+            }
+            <a asp-controller="Product" asp-action="Product" class="btn btnCancel">Cancel</a>
+        </div>
+    </form>
+</div>

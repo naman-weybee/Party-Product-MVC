@@ -1,0 +1,39 @@
+﻿@model IEnumerable<InvoiceModel>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th width="10%">#</th>
+            <th>Party Name</th>
+            <th>Product Name</th>
+            <th>Rate</th>
+            <th>Quantity</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th scope="row">@item.Id</th>
+                <td>@(string.IsNullOrEmpty(item.PartyName) ? "Party Not Available" : item.PartyName)</td>
+                <td>@(string.IsNullOrEmpty(item.ProductName) ? "Product Not Available" : item.ProductName)</td>
+                <td>@item.CurrentRate</td>
+                <td>@item.Quantity</td>
+                <td>@item.Total</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<br />
+
+<div class="text-sm-right">
+    <strong class="h4">Grand Total : @ViewBag.grandTotal</strong>
+</div>
+<br />
+
+<div class="form-group text-sm-right">
+    <a asp-controller="Invoice" asp-action="ClrearInvoice" class="btn CloseInvoice">Clear Invoice</a>
+    <a asp-controller="Invoice" asp-action="InvoiceClose" class="btn CloseInvoice">Close Invoice</a>
+</div>

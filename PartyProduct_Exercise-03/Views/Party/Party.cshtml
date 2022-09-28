@@ -1,0 +1,46 @@
+﻿@{
+    ViewData["Title"] = "Party";
+}
+@model IEnumerable<PartyModel>
+
+<div class="text-center">
+    <h3 class="h3 font-weight-normal">Party List</h3>
+</div>
+
+<div class="float-right">
+    <a class="btn btnAdd" asp-controller="Party" asp-action="PartyAdd">Add Party</a>
+</div>
+<br />
+<br />
+@if (ViewBag.delete == true)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Sorry,</strong> You can not delete this Party Because this Party is Assigned to Product(s).
+    </div>
+}
+<br />
+
+<div class="container">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th width="15%">#</th>
+                <th>Party Name</th>
+                <th width="30%">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <th scope="row">@item.Id</th>
+                    <td>@item.PartyName</td>
+                    <td>
+                        <a asp-controller="Party" asp-action="PartyEdit" asp-route-id="@item.Id" data-value="@item.Id" asp-route-partyname="@item.PartyName" class="btn btn-info">Edit</a>
+                        <a asp-controller="Party" asp-action="PartyDelete" data-value="@item.Id" asp-route-id="@item.Id" class="btn btn-danger" onclick="return confirm('Are You Sure... You want to Delete this Party ?')">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

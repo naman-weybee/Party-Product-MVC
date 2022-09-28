@@ -1,0 +1,42 @@
+﻿@{
+    ViewData["Title"] = "Assign Party";
+}
+@model IEnumerable<AssignPartyModel>
+
+<div class="text-center">
+    <h3 class="h3 font-weight-normal">Assign Party List</h3>
+</div>
+
+<div class="float-right">
+    <a class="btn btnAdd" asp-controller="AssignParty" asp-action="AssignPartyAdd">Assign Party</a>
+</div>
+<br />
+<br />
+<br />
+
+<div class="container">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th width="15%">#</th>
+                <th>Party Name</th>
+                <th>Product Name</th>
+                <th width="30%">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <th scope="row">@item.Id</th>
+                    <td>@item.Party.PartyName</td>
+                    <td>@item.Product.ProductName</td>
+                    <td>
+                        <a asp-controller="AssignParty" asp-action="AssignPartyEdit" asp-route-id="@item.Id" asp-route-partyid="@item.PartyId" asp-route-productid="@item.ProductId" data-value="@item.Id" class="btn btn-info">Edit</a>
+                        <a asp-controller="AssignParty" asp-action="AssignPartyDelete" data-value="@item.Id" asp-route-id="@item.Id" class="btn btn-danger" onclick="return confirm('Are You Sure... You want to Delete this Assigned Party ?')">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

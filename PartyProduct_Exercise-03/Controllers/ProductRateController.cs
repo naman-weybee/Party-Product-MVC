@@ -29,6 +29,7 @@ namespace PartyProduct_Exercise_03.Controllers
             ViewBag.productRateId = productRateId;
             ViewBag.productName = productName;
             ViewBag.productRate = productRate;
+            ViewBag.IsDisabled = false;
             return View();
         }
 
@@ -54,6 +55,7 @@ namespace PartyProduct_Exercise_03.Controllers
         [HttpGet("EditProductRate/{id}/{productId}/{rate}")]
         public IActionResult ProductRateEdit(int productId, int rate, int isSuccess = 0, [FromRoute] int productRateId = 0)
         {
+            ViewBag.IsDisabled = true;
             return View("ProductRateAdd");
         }
 

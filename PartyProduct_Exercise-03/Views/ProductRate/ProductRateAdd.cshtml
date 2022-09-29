@@ -40,7 +40,7 @@
     <form method="post" enctype="multipart/form-data" asp-controller="ProductRate" asp-action="@action">
         <div class="form-group row justify-content-center">
             <label asp-for="ProductId" class="col-sm-2 col-form-label">Product Name :</label>
-            <select asp-for="ProductId" class="form-control col-sm-4" asp-items="(await _productRepository.GetAllProduct()).Select(x => new SelectListItem() { Value = x.Id.ToString(), Text = x.ProductName })">
+            <select asp-for="ProductId" class="form-control col-sm-4" asp-items="(await _productRepository.GetAllProduct()).Select(x => new SelectListItem() { Value = x.Id.ToString(), Text = x.ProductName })"  disabled="@ViewBag.IsDisabled" style="color:@(ViewBag.IsDisabled ? "grey" : "black" )">
                 <option value="">Choose Product Name</option>
             </select>
             <span asp-validation-for="ProductId" class="text-danger"></span>
